@@ -62,41 +62,19 @@ public class baseOfBooking {
 
 
     public void putUpdateBooking() {
-        String putData= "{\n" +
-                "    \"firstname\" : \"Getir\",\n" +
-                "    \"lastname\" : \"Jerry\",\n" +
-                "}";
-
-        given()
-                .body(putData)
-                .header("Content-Type", "application/json")
-                .header("Cookie", token)
-                .log().all(). //header,params
-                when()
-                .put("https://restful-booker.herokuapp.com/booking/"+bookingid).
-                then() //assertion
-                .statusCode(200)
-                .log().all();
-
-    }
-
-    @Test
-    public void patchPartialUpdateBooking() {
 
         Map<String,Object> queryParams = new HashMap<>();
         queryParams.put("firstname","Academy");
         queryParams.put("lastname","QA");
 
         given()
-
                 .log().all()
                 .queryParams(queryParams)
-                .header("Content-Type","application/json")
-                .header("Accept", "application/json")
-                .header("Cookie",token)
+                .header("Content-Type", "application/json")
+                .header("Cookie", token)
                 .log().all(). //header,params
                 when()
-                .patch("https://restful-booker.herokuapp.com/booking/" + bookingid).
+                .put("https://restful-booker.herokuapp.com/booking/"+bookingid).
                 then() //assertion
                 .statusCode(200)
                 .log().all();
