@@ -2,11 +2,9 @@ package services;
 
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import io.restassured.http.ContentType;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 import static io.restassured.RestAssured.given;
@@ -97,14 +95,18 @@ public class baseOfBooking {
     public void deleteBooking(){
         given()
                 .header("Content-Type","application/json")
-                .header("Cookie",token)
+                .header("Cookie","token"+token)
                 .log().all(). //header,params
                 when()
                 .delete("https://restful-booker.herokuapp.com/booking/"+bookingid).
                 then() //assertion
                 .statusCode(200)
                 .log().all();
-
     }
+    @DataProvider(name = "deleteBookingDataProvider")
+    public Object[][] deleteBookingDataProvider() {
+        return new Object[][]
+                {bookingid, 200, "internal server error"}
 
-}
+
+    }}
